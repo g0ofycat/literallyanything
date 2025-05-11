@@ -25,6 +25,14 @@ body {
     letter-spacing: 0.3px;
 }
 
+p {
+    font-weight: 100;
+}
+
+.copyright {
+    opacity: 0;
+}
+
 .main-content {
     display: flex;
     flex-direction: column;
@@ -219,7 +227,7 @@ body {
     bottom: -10px;
     left: 50%;
     transform: translateX(-50%);
-    width: 500px;
+    width: 50vw;
     height: 1px;
     background: #ffffff;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
@@ -287,7 +295,7 @@ body {
     bottom: -10px;
     left: 50%;
     transform: translateX(-50%);
-    width: 500px;
+    width: 50vw;
     height: 1px;
     background: #ffffff;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
@@ -304,11 +312,10 @@ body {
 }
 
 .team-card {
-    background: rgba(19, 19, 19, 0.95);
-    backdrop-filter: blur(10px);
+    background: rgba(19, 19, 19, 1);
     border-radius: 15px;
     padding: 30px;
-    border: 2px solid rgba(98, 98, 98, 0.07);
+    border: 2px solid rgba(98, 98, 98, 1);
     transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     opacity: 0;
     transform: translateY(30px);
