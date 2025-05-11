@@ -1,36 +1,287 @@
-<!DOCTYPE html>
-<html lang="en">
+* {
+    box-sizing: border-box;
+}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://github.githubassets.com">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="icon" type="image/svg+xml" href="images/Logo.png">
-    <link rel="preload" href="style.css" as="style">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"></noscript>
-    <script src="script.js" defer></script>
-    <title>Literally Anything</title>
-</head>
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
 
-<body class="prevent-select">
-    <div class="money-particles" id="moneyParticles"></div>
-    
-    <div class="logo-container" id="logo">
-        <img src="images/Logo.png" alt="Logo" class="logo">
-    </div>
-    <h1 class="fade-in-text">
-        <span>Literally</span>
-        <span>Anything</span>
-    </h1>
-    <p id="typewriter-quote"></p>
-    <div class="interactive-controls">  
-        <button id="quote-cycle" class="control-btn"><b>New Quote</b></button>
-    </div>
-</body>
+body {
+    margin: 0;
+    padding: clamp(5vh, 8vh, 10vh) 0 0 0; 
+    font-family: 'Poppins', sans-serif;
+    background-color: #0f0f0f;
+    background-image: radial-gradient(circle at 50% 150%, rgba(255, 255, 255, 0.1), transparent 90%);
+    color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
 
-</html>
+.prevent-select {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.logo-container {
+    position: absolute;
+    top: clamp(1rem, 5vw, 2rem);
+    left: clamp(1rem, 3vw, 1.5rem);
+    padding: 0.5rem;
+    transition: transform 0.3s ease-in-out;
+}
+
+.logo {
+    width: clamp(60px, 20vw, 100px);
+    height: clamp(60px, 20vw, 100px);
+    border-radius: 50%;
+    border: 2px solid white;
+    display: block;
+    transition: border-width 0.3s ease-in-out, padding 0.3s ease-in-out;
+}
+
+.logo-container:hover {
+    transform: scale(1.05);
+}
+
+.logo-container:hover .logo {
+    border-width: 4px;
+    padding: 2px;
+}
+
+.logo-container::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    border-radius: 50%;
+    border: 2px solid transparent;
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    z-index: -1;
+}
+
+.logo-container:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    border-color: white;
+}
+
+.fade-in-text {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.2;
+    letter-spacing: 0.1em;
+    margin-top: -0.5rem;
+}
+
+.fade-in-text span {
+    display: inline-block;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    transform-origin: bottom;
+    margin-right: 0.2em;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.fade-in-text span:last-child {
+    margin-right: 0;
+}
+
+#typewriter-quote {
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+    font-weight: 300;
+    font-style: italic;
+    opacity: 0;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 0.075em solid white;
+    animation: blink-caret 0.5s step-end infinite;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.interactive-controls {
+    display: flex;
+    gap: clamp(0.5rem, 2vw, 1rem);
+    margin-top: clamp(1rem, 3vw, 1.5rem);
+    z-index: 10;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.control-btn {
+    padding: clamp(0.5rem, 1vw, 0.75rem) clamp(1rem, 3vw, 1.5rem);
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    background-color: rgba(255, 255, 255, 0);
+    color: #f0f0f0;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    touch-action: manipulation;
+}
+
+.control-btn:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(62, 62, 62, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 2px solid rgb(255, 255, 255);
+    transform: translate(0, -10%);
+}
+
+.control-btn:active {
+    transform: translateY(0);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.logo.spin {
+    animation: spin 1s ease-in-out;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.9); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: white; }
+}
+
+.money-particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.money-particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background-color: #ffffff;
+    opacity: 0;
+    transform: translateY(0);
+    box-shadow: 0 0 4px 1px rgba(255, 255, 255, 0.7);
+}
+
+@keyframes float-up {
+    0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.6; }
+    100% { transform: translateY(-20vh) translateX(var(--random-x)); opacity: 0; }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 5vh 0 0 0;
+    }
+
+    .logo-container {
+        top: 1rem;
+        left: 1rem;
+    }
+
+    .logo {
+        width: clamp(50px, 15vw, 60px);
+        height: clamp(50px, 15vw, 60px);
+    }
+
+    .fade-in-text {
+        font-size: clamp(1.2rem, 6vw, 1.5rem);
+        letter-spacing: 0.05em;
+    }
+
+    #typewriter-quote {
+        font-size: clamp(0.8rem, 4vw, 0.9rem);
+        white-space: normal;
+    }
+
+    .interactive-controls {
+        gap: 0.5rem;
+        margin-top: 1rem;
+    }
+
+    .control-btn {
+        padding: 0.5rem 1rem;
+        font-size: clamp(0.8rem, 3vw, 0.9rem);
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 3vh 0 0 0;
+    }
+
+    .logo-container {
+        top: 0.5rem;
+        left: 0.5rem;
+    }
+
+    .logo {
+        width: 50px;
+        height: 50px;
+    }
+
+    .fade-in-text {
+        font-size: clamp(1rem, 5vw, 1.2rem);
+        margin-top: 0;
+    }
+
+    #typewriter-quote {
+        font-size: clamp(0.7rem, 3.5vw, 0.8rem);
+    }
+
+    .interactive-controls {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .control-btn {
+        width: 80%;
+        text-align: center;
+    }
+}
+
+@media (hover: none) {
+    .logo-container:hover,
+    .control-btn:hover {
+        transform: none;
+        box-shadow: none;
+        border: inherit;
+        backdrop-filter: inherit;
+        -webkit-backdrop-filter: inherit;
+    }
+
+    .logo-container:hover::before {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0;
+        border-color: transparent;
+    }
+}
