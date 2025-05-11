@@ -12,48 +12,65 @@ document.addEventListener("DOMContentLoaded", () => {
   let isTyping = false;
 
   function typeWriter(text, i, element, callback) {
+    if (i === 0) {
+      element.innerText = "";
+    }
     if (i < text.length) {
-      element.innerHTML = text.substring(0, i + 1);
-      element.style.borderRight = "0.1em solid white";
+      element.innerText = text.substring(0, i + 1);
       setTimeout(() => typeWriter(text, i + 1, element, callback), 20);
     } else {
-      element.style.borderRight = "none";
       isTyping = false;
       if (callback) callback();
     }
   }
 
+  function deleteQuote(element, callback) {
+    const currentText = element.innerText;
+    if (currentText.length > 0) {
+      element.innerText = currentText.substring(0, currentText.length - 1);
+      setTimeout(() => deleteQuote(element, callback), 20);
+    } else {
+      element.innerHTML = " ";
+      setTimeout(callback, 300);
+    }
+  }
+
   function displayQuote() {
-    if (isTyping) {
+    if (isTyping || quotes.length === 0) {
+      if (quotes.length === 0) {
+        console.warn("No quotes available to display.");
+        const quoteElement = document.getElementById("typewriter-quote");
+        if (quoteElement) {
+          quoteElement.innerHTML = "&nbsp;";
+        }
+      }
       return;
     }
     isTyping = true;
+
     const quoteElement = document.getElementById("typewriter-quote");
     if (!quoteElement) {
       console.error("Quote element not found!");
       isTyping = false;
       return;
     }
-    quoteElement.style.opacity = "0";
-    quoteElement.innerHTML = "";
-    setTimeout(() => {
-      quoteElement.style.opacity = "1";
-      typeWriter(quotes[currentQuoteIndex], 0, quoteElement, () => {
-        quoteElement.style.opacity = "1";
-        console.log("Quote displayed:", quotes[currentQuoteIndex]);
+
+    quoteElement.style.opacity = "1";
+    deleteQuote(quoteElement, () => {
+      currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+      const newQuote = quotes[currentQuoteIndex];
+      typeWriter(newQuote, 0, quoteElement, () => {
+        isTyping = false;
       });
-    }, 300);
+    });
   }
 
-  const quoteCycleBtn = document.getElementById("quote-cycle");
-  if (quoteCycleBtn) {
-    quoteCycleBtn.addEventListener("click", () => {
-      console.log("Quote cycle button clicked");
-      currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
-      displayQuote();
-    });
-  } else {
-    console.error("Quote cycle button not found!");
+  if (quotes.length > 0) {
+    setInterval(() => {
+      if (!isTyping) {
+        displayQuote();
+      }
+    }, 5000);
   }
 
   const logo = document.getElementById("logo");
@@ -84,61 +101,72 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     displayQuote();
   }
-});
 
-function initMoneyParticles() {
-    const container = document.getElementById('moneyParticles');
+  function initMoneyParticles() {
+    const container = document.getElementById("moneyParticles");
     const particleCount = 70;
-    
-    for (let i = 0; i < particleCount; i++) {
-        createParticle(container);
-    }
-    
-    setInterval(() => {
-        createParticle(container);
-    }, 200);
-}
 
-function createParticle(container) {
-    const particle = document.createElement('div');
-    particle.className = 'money-particle';
-    
+    for (let i = 0; i < particleCount; i++) {
+      createParticle(container);
+    }
+
+    setInterval(() => {
+      createParticle(container);
+    }, 100);
+  }
+
+  function createParticle(container) {
+    const particle = document.createElement("div");
+    particle.className = "money-particle";
+
     const posX = Math.random() * window.innerWidth;
     particle.style.left = `${posX}px`;
-    particle.style.bottom = '0';
-    
+    particle.style.bottom = "0";
+
     const randomX = (Math.random() - 0.5) * 200;
-    particle.style.setProperty('--random-x', `${randomX}px`);
-    
-    const size = 1 + Math.random() * 2;
+    particle.style.setProperty("--random-x", `${randomX}px`);
+
+    const size = 1 + Math.random() * 4;
     particle.style.width = `${size}px`;
     particle.style.height = `${size}px`;
-    
-    particle.style.backgroundColor = '#ffffff';
-    
-    const duration = 8 + Math.random() * 12;
-    particle.style.animation = `float-up ${duration}s linear forwards`;
-    
-    container.appendChild(particle);
-    
-    setTimeout(() => {
-        if (container.contains(particle)) {
-            container.removeChild(particle);
-        }
-    }, duration * 1000);
-}
 
-window.addEventListener('DOMContentLoaded', () => {
-    initMoneyParticles();
-    
-    const spans = document.querySelectorAll('.fade-in-text span');
-    spans.forEach((span, index) => {
-        span.style.animation = `fadeIn 1s ease-out ${index * 0.5}s forwards`;
-    });
-    
-    document.getElementById('quote-cycle').addEventListener('click', () => {
-        for (let i = 0; i < 20; i++) {
-            createParticle(document.getElementById('moneyParticles'));
-        }
-    });
+    particle.style.backgroundColor = "#ffffff";
+
+    const duration = 8 + Math.random() * 18;
+    particle.style.animation = `float-up ${duration}s linear forwards`;
+
+    container.appendChild(particle);
+
+    setTimeout(() => {
+      if (container.contains(particle)) {
+        container.removeChild(particle);
+      }
+    }, duration * 1000);
+  }
+
+  initMoneyParticles();
+
+  document.getElementById("quote-cycle")?.addEventListener("click", () => {
+    for (let i = 0; i < 20; i++) {
+      createParticle(document.getElementById("moneyParticles"));
+    }
+    if (!isTyping) {
+      displayQuote();
+    }
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const fadeText = document.querySelector(".fade-in-text");
+  const quote = document.getElementById("typewriter-quote");
+  const whoWeAre = document.querySelector(".who-we-are");
+  const teams = document.querySelector(".team-section");
+
+  fadeText.addEventListener("animationend", () => {
+    setTimeout(() => {
+      quote.classList.add("fade-in");
+      whoWeAre.classList.add("fade-in");
+      teams.classList.add("fade-in");
+    }, 200);
+  });
 });
