@@ -31,6 +31,7 @@ p {
 
 .copyright {
     opacity: 0;
+    color: #525252;
 }
 
 .main-content {
@@ -444,6 +445,238 @@ p {
     width: 100%;
 }
 
+.pricing-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    text-align: center;
+    opacity: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #f0f0f0;
+}
+
+.pricing-section h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 60px;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    position: relative;
+}
+
+.pricing-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50vw;
+    height: 1px;
+    background: #ffffff;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+        0 0 20px rgba(255, 255, 255, 0.6),
+        0 0 30px rgba(255, 255, 255, 0.4);
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+.pricing-card {
+    background: rgba(19, 19, 19, 1);
+    border-radius: 15px;
+    padding: 30px;
+    border: 2px solid rgba(98, 98, 98, 1);
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    opacity: 1;
+    transform: translateY(5px);
+    background-image: radial-gradient(circle at 50% 150%, rgba(137, 137, 137, 0.2), transparent 90%);
+}
+
+.pricing-card.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.pricing-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(70, 70, 70, 0.5);
+    border: 2px solid rgba(148, 148, 148, 0.15);
+}
+
+.pricing-card h3 {
+    font-size: 1.7rem;
+    margin-bottom: 15px;
+    color: white;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    transition: color 0.3s ease;
+}
+
+.pricing-card:hover h3 {
+    color: #e0e0e0;
+}
+
+.pricing-card .price {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 20px;
+    opacity: 1;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.pricing-card .price span {
+    font-size: 1rem;
+    font-weight: normal;
+    color: #888;
+}
+
+.pricing-card ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 25px;
+}
+
+.pricing-card li {
+    font-size: 1rem;
+    color: #aaa;
+    margin-bottom: 10px;
+    font-weight: 300;
+}
+
+.pricing-card .cta-button {
+    display: inline-block;
+    padding: 10px 30px;
+    background: rgba(20, 20, 20, 0.6);
+    color: #ccc;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 25px;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+}
+
+.pricing-card .cta-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.07);
+    transition: width 0.4s ease;
+    z-index: -1;
+}
+
+.pricing-card .cta-button:hover {
+    background: rgba(30, 30, 30, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    color: white;
+}
+
+.pricing-card .cta-button:hover::after {
+    width: 100%;
+}
+
+.contact-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    color: #f0f0f0;
+    opacity: 0;
+}
+
+.contact-section h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 60px;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    position: relative;
+}
+
+.contact-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50vw;
+    height: 1px;
+    background: #ffffff;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+        0 0 20px rgba(255, 255, 255, 0.6),
+        0 0 30px rgba(255, 255, 255, 0.4);
+}
+
+.contact-section p {
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: #aaa;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact-button {
+    display: inline-block;
+    padding: 12px 40px;
+    background: rgba(20, 20, 20, 0.6);
+    color: #ccc;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 25px;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+}
+
+.contact-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.07);
+    transition: width 0.4s ease;
+    z-index: -1;
+}
+
+.contact-button:hover {
+    background: rgba(30, 30, 30, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    color: white;
+}
+
+.contact-button:hover::after {
+    width: 100%;
+}
 
 /* Keyframes */
 @keyframes spin {
@@ -501,21 +734,22 @@ p {
 }
 
 /* Media Queries */
-
 @media (max-width: 768px) {
-    .team-grid {
+
+    .team-grid,
+    .pricing-grid {
         grid-template-columns: 1fr;
         max-width: 500px;
         margin: 0 auto;
     }
 
-    @media (max-width: 768px) {
-        .team-section {
-            margin: 60px auto;
-        }
+    .team-section,
+    .pricing-section {
+        margin: 60px auto;
     }
 
-    .team-section h2 {
+    .team-section h2,
+    .pricing-section h2 {
         margin-bottom: 30px;
     }
 }
@@ -526,7 +760,8 @@ p {
         height: 120px;
     }
 
-    .team-card {
+    .team-card,
+    .pricing-card {
         padding: 20px;
     }
 }
@@ -634,7 +869,9 @@ p {
 @media (hover: none) {
 
     .logo-container:hover,
-    .control-btn:hover {
+    .control-btn:hover,
+    .pricing-card:hover,
+    .cta-button:hover {
         transform: none;
         box-shadow: none;
         border: inherit;
@@ -647,4 +884,5 @@ p {
         opacity: 0;
         border-color: transparent;
     }
+
 }
