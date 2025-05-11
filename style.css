@@ -193,7 +193,6 @@ body {
 
 .who-we-are {
     max-width: 800px;
-    margin: 20px auto;
     padding: 20px;
     text-align: center;
     font-family: 'Poppins', sans-serif;
@@ -262,7 +261,7 @@ body {
 
 .team-section {
     max-width: 1200px;
-    margin: -20px auto;
+    margin: 0px auto;
     padding: 10px;
     text-align: center;
     opacity: 0;
@@ -299,7 +298,7 @@ body {
 .team-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 40px;
+    gap: 10px;
     justify-content: center;
     padding: 0 20px;
 }
@@ -503,8 +502,10 @@ body {
         margin: 0 auto;
     }
 
-    .team-section {
-        margin: 50px auto;
+    @media (max-width: 768px) {
+        .team-section {
+            margin: 60px auto;
+        }
     }
 
     .team-section h2 {
@@ -559,7 +560,7 @@ body {
     }
 
     .who-we-are {
-        margin: 30px auto;
+        margin: 40px auto;
         padding: 15px;
     }
 
@@ -609,7 +610,7 @@ body {
     }
 
     .who-we-are {
-        margin: 20px auto;
+        margin: 30px auto;
         padding: 10px;
     }
 
