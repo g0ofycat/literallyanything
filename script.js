@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     particle.style.backgroundColor = "#ffffff";
 
-    const duration = 8 + Math.random() * 18;
+    const duration = 20 + Math.random() * 30;
     particle.style.animation = `float-up ${duration}s linear forwards`;
 
     container.appendChild(particle);
