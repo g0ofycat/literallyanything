@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function initMoneyParticles() {
     const container = document.getElementById("moneyParticles");
-    const particleCount = 70;
+    const particleCount = 100;
 
     for (let i = 0; i < particleCount; i++) {
       createParticle(container);
@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     particle.style.backgroundColor = "#ffffff";
 
-    const duration = 20 + Math.random() * 30;
+    const duration = 5 + Math.random() * 10;
     particle.style.animation = `float-up ${duration}s linear forwards`;
 
     container.appendChild(particle);
@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (container.contains(particle)) {
         container.removeChild(particle);
       }
-    }, duration * 1000);
+    }, duration * 100000);
   }
 
   initMoneyParticles();
@@ -161,12 +161,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const quote = document.getElementById("typewriter-quote");
   const whoWeAre = document.querySelector(".who-we-are");
   const teams = document.querySelector(".team-section");
+  const copyright = document.querySelector(".copyright");
 
   fadeText.addEventListener("animationend", () => {
     setTimeout(() => {
       quote.classList.add("fade-in");
       whoWeAre.classList.add("fade-in");
       teams.classList.add("fade-in");
+      copyright.classList.add("fade-in");
     }, 200);
   });
 });
