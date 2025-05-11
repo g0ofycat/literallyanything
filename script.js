@@ -162,13 +162,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const whoWeAre = document.querySelector(".who-we-are");
   const teams = document.querySelector(".team-section");
   const copyright = document.querySelector(".copyright");
-
+  const pricing = document.querySelector(".pricing-section");
+  const contact = document.querySelector(".contact-section");
+  
   fadeText.addEventListener("animationend", () => {
     setTimeout(() => {
       quote.classList.add("fade-in");
       whoWeAre.classList.add("fade-in");
       teams.classList.add("fade-in");
       copyright.classList.add("fade-in");
+      pricing.classList.add("fade-in");
+      contact.classList.add("fade-in");
     }, 200);
   });
 });
